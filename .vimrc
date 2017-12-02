@@ -12,7 +12,7 @@ filetype on
   nmap <F1> <Esc>/<++><Enter>"_c4l
   inoremap ~~ <++>
   map <F12> :split ~/.vimrc<CR>G
-
+  noremap Q <nop>
 
 ".C and CPP files
   autocmd FileType h,cpp,c set tabstop=2
@@ -22,7 +22,8 @@ filetype on
   autocmd FileType h,cpp,c set expandtab
   autocmd FileType h,cpp,c set cindent
   autocmd FileType h,cpp,c set t_Co=256
-  autocmd FileType h,cpp,c set textwidth=120
+  autocmd FileType h,cpp,c set textwidth=80
+  autocmd FileType h,cpp,c set colorcolumn=80
   autocmd FileType h,cpp,c set comments=sl:/*,mb:\ *,elx:\ */
   autocmd FileType h,cpp,c map <F4> :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
   "Auto expand for brackets
@@ -33,9 +34,12 @@ filetype on
 let g:clang_library_path='/usr/lib64/libclang.so.5.0.0'
 
 "TEX files
-  autocmd FileType txt,tex setlocal spell spelllang=en_gb
+  autocmd FileType md,txt,tex setlocal spell spelllang=en_gb
   autocmd FileType tex set cindent
   autocmd FileType tex inoremap ;q \section{Question <++>}<CR>\textit{<++>}<CR>  \begin{enumerate}<CR>\end{enumerate}<Esc>O  <++><Esc>kkk<Esc>/<++><Enter>"_c4l
+
+  nmap ;n :0r $NOTES_DIR/.standard.bnot<CR>Gmsgg/$date<CR>"_d$i <c-r>=substitute(system('date +\%m/\%d/\%Y'),'[\r\n]*$','','')<cr><ESC>/$title<CR>"_d$"%p$diw"_x'so
+
 
 execute pathogen#infect()
 call pathogen#helptags()
